@@ -6,6 +6,8 @@ Abstract:
 >Promise表示一个异步操作的最终结果。与Promise最主要的交互方法是通过将函数传入它的then方法从而获取得Promise最终的值或Promise最终最拒绝（reject）的原因。
 
 Sample:
+>以下代码做为promise的用例，并同时介绍了node.js 与 elasticsearch 的交互
+
 ```javascript
 var elasticsearch = require('elasticsearch');
 var client = new elasticsearch.Client({
