@@ -4,7 +4,7 @@ Key:
 > HTTP, Keep-ALive, Refer, User,HTTP头字段总结
 
 Abstract:
-****
+
 >1、 Accept：告诉WEB服务器自己接受什么介质类型，/ 表示任何类型，type/* 表示该类型下的所有子类型，type/sub-type。
 
 >2、 Accept-Charset： 浏览器申明自己接收的字符集 Accept-Encoding： 浏览器申明自己接收的编码方法，通常指定压缩方法，是否支持压缩，支持什么压缩方法（gzip，deflate） Accept-Language：浏览器申明自己接收的语言 语言跟字符集的区别：中文是语言，中文有多种字符集，比如big5，gb2312，gbk等等。
