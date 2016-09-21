@@ -17,7 +17,7 @@
 
 
 
-    sudo docker network create   
+    sudo docker network create   --driver=bridge hadoop
 
 
 
@@ -48,7 +48,7 @@
 
 
 
-    sudo docker network create   
+    sudo docker network create --driver=bridge hadoop   
 
 
 #### **4\. 运行Docker容器**
@@ -64,7 +64,7 @@
     start hadoop-master container...  
     start hadoop-slave1 container...  
     start hadoop-slave2 container...  
-    root@hadoop-master:~  
+    root@hadoop-master:~#  
 
 
 * 启动了3个容器，1个master, 2个slave
@@ -72,7 +72,11 @@
 
 #### **5\. 启动hadoop**
 
+    ./start-hadoop.sh
+   
 #### **6\. 运行wordcount**
+    
+    ./run-wordcount.sh
 
 **运行结果**
 
