@@ -15,12 +15,11 @@
 
 之前的版本使用serf/dnsmasq为Hadoop集群提供DNS服务，由于Docker网络功能更新，现在并不需要了。更新的版本中，使用以下命令为Hadoop集群创建单独的网络:
 
-| ----- |
-|
+
 
     sudo docker network create   
 
- |
+
 
 然后在运行Hadoop容器时，使用"–net=hadoop"选项，这时所有容器将运行在hadoop网络中，它们可以通过容器名称进行通信。
 
@@ -35,52 +34,38 @@
 
 #### **1\. 下载Docker镜像**
 
-| ----- |
-|
 
     sudo docker pull kiwenlau/hadoop:1.0  
 
- |
 
 #### **2\. 下载GitHub仓库**
 
-| ----- |
-|
-
     git clone https://github.com/kiwenlau/hadoop-cluster-docker  
 
- |
+
 
 #### **3\. 创建Hadoop网络**
 
-| ----- |
-|
+
 
     sudo docker network create   
 
- |
 
 #### **4\. 运行Docker容器**
 
-| ----- |
-|
 
     cd hadoop-cluster-docker  
     ./start-container.sh  
 
- |
 
 **运行结果**
 
-| ----- |
-|
 
     start hadoop-master container...  
     start hadoop-slave1 container...  
     start hadoop-slave2 container...  
     root@hadoop-master:~  
 
- |
 
 * 启动了3个容器，1个master, 2个slave
 * 运行后就进入了hadoop-master容器的/root目录
@@ -91,8 +76,6 @@
 
 **运行结果**
 
-| ----- |
-|
 
     input file1.txt:  
     Hello Hadoop  
@@ -103,7 +86,7 @@
     Hadoop	1  
     Hello	2  
 
- |
+
 
 Hadoop网页管理地址:
 
