@@ -13,6 +13,7 @@
 
 #### Logon redis server
 >docker exec -it redis bash
+>
 >redis-cli
 
 #### redis command
