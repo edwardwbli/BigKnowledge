@@ -1,3 +1,2 @@
 
-# Everything here to tell how to build micro service 
-
+# Everything here to tell how to build micro service with docker
