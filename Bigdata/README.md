@@ -45,8 +45,12 @@ counts.saveAsTextFile("hdfs://...")
 
 >不过也有许多技术对Hadoop进行改进，如```Pig```，```Cascading```，```JAQL```，```OOzie```，```Tez```，```Spark```等。
 
+##Benchmark
+>Spark的性能相比Hadoop有很大提升，2014年10月，Spark完成了一个Daytona Gray类别的Sort Benchmark测试，排序完全是在磁盘上进行的，与Hadoop之前的测试的对比结果如表格所示：
+![image](https://pic2.zhimg.com/029ab6e670fa8f5248d5120ab5fb3a59_b.jpg)
 
 
+>来源：［https://www.zhihu.com/question/26568496］
 
 
 
