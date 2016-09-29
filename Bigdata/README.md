@@ -11,7 +11,7 @@
 
 >分布式内存抽象，就是RDD（Resilient Distributed Dataset），RDD就是一个不可变的带分区的记录集合，RDD也是Spark中的编程模型。Spark提供了RDD上的两类操作，转换和动作。转换是用来定义一个新的RDD，包括map, flatMap, filter, union, sample, join, groupByKey, cogroup, ReduceByKey, cros, sortByKey, mapValues等，动作是返回一个结果，包括collect, reduce, count, save, lookupKey。
 
->Spark的API非常简单易用，Spark的WordCount的示例如下所示（scala[^scala]实现）：
+>Spark的API非常简单易用，Spark的WordCount的示例如下所示（scala实现）：
 ```scala
 val spark = new SparkContext(master, appName, [sparkHome], [jars])
 val file = spark.textFile("hdfs://...")
@@ -45,8 +45,12 @@ counts.saveAsTextFile("hdfs://...")
 >不过也有许多技术对Hadoop进行改进，如```Pig```，```Cascading```，```JAQL```，```OOzie```，```Tez```，```Spark```等。
 
 
+
+
+
+
 [^scala]:Scala 语言是一门类 Java 的多范式语言，其设计初衷就是为了继承函数式编程的面向对象编程的各种特性，正如 Scala 语言官网 描述的那样:Object-Oriented Meets Functional, 就是给出了一个关于 Scala 语言特性的最简单明了的概括。
-Spark 框架使用 Scala 语言开发，那么使用 Scala 语言开发 Spark 应用程序就变成一件很自然的事情，虽然 Spark 提供了面向 Python,Java 等语言的编程接口，但是从各个方面来看使用 Scala 编程都是最简单最容易理解的，特别是当程序出现异常或者是需要通过学习源码来定位问题时，您会发现学习 Scala 语言来编写 Spark 应用程序是多么有意义的事情。关于 Scala 语言，如果您还没有基础，请参考
+Spark 框架使用 Scala 语言开发，那么使用 Scala 语言开发 Spark 应用程序就变成一件很自然的事情，虽然 Spark 提供了面向 Python,Java 等语言的编程接口，但是从各个方面来看使用 Scala 编程都是最简单最容易理解的，特别是当程序出现异常或者是需要通过学习源码来定位问题时，您会发现学习 Scala 语言来编写 Spark 应用程序是多么有意义的事情。
 
 
 
