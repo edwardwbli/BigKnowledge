@@ -157,51 +157,6 @@
 <p>那么我们总体地说，其实函数式编程最适合地还是解决局部性的数学小问题，要让函数式编程来做CRUD，来做我们传统的逻辑性很强的Web编程，就有些免为其难了。</p>
 <p>就像如果要用Scala完全取代今天的Java的工作，我想恐怕效果会很糟糕。而让Scala来负责底层服务的编写，恐怕再合适不过了。</p>
 <p>而在一种语言中融入多种语言范式，最典型的C#。在C# 3.0中引入Lambda表达式，在C# 4.0中引入声明式编程，我们某些人在嘲笑C#越来越臃肿的同时，却忽略了，这样的语法糖，带给我们的不仅仅是代码书写上的遍历，更重要的是编程思维的一种进步。</p>
-<p>好吧，那就让我们忘记那些C#中Lambda背后的实现机制，在C#中，还是在那些更纯粹地支持函数式编程的语言中，尽情地去体验函数式编程带给我们的快乐把！</p></div><div id="MySignature"></div>
-<div class="clear"></div>
-<div id="blog_post_info_block">
-<div id="BlogPostCategory"></div>
-<div id="EntryTag"></div>
-<div id="blog_post_info"><div id="green_channel">
-        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(1976519,cb_blogId,1);green_channel_success(this,'谢谢推荐！');">好文要顶</a>
-            <a id="green_channel_follow" onclick="follow('ec43420b-63cf-dd11-9e4d-001cf0cd104b');" href="javascript:void(0);">关注我</a>
-    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
-    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="//common.cnblogs.com/images/icon_weibo_24.png" alt=""></a>
-    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="//common.cnblogs.com/images/wechat.png" alt=""></a>
-</div>
-<div id="author_profile">
-    <div id="author_profile_info" class="author_profile_info">
-            <a href="http://home.cnblogs.com/u/kym/" target="_blank"><img src="//pic.cnblogs.com/face/u35999.jpg" class="author_avatar" alt=""></a>
-        <div id="author_profile_detail" class="author_profile_info">
-            <a href="http://home.cnblogs.com/u/kym/">飞林沙</a><br>
-            <a href="http://home.cnblogs.com/u/kym/followees">关注 - 22</a><br>
-            <a href="http://home.cnblogs.com/u/kym/followers">粉丝 - 433</a>
-        </div>
-    </div>
-    <div class="clear"></div>
-    <div id="author_profile_honor">荣誉：<a href="http://www.cnblogs.com/expert/" target="_blank">推荐博客</a></div>
-    <div id="author_profile_follow">
-                <a href="javascript:void(0);" onclick="follow('ec43420b-63cf-dd11-9e4d-001cf0cd104b');return false;">+加关注</a>
-    </div>
-</div>
-<div id="div_digg">
-    <div class="diggit" onclick="votePost(1976519,'Digg')">
-        <span class="diggnum" id="digg_count">56</span>
-    </div>
-    <div class="buryit" onclick="votePost(1976519,'Bury')">
-        <span class="burynum" id="bury_count">0</span>
-    </div>
-    <div class="clear"></div>
-    <div class="diggword" id="digg_tips">
-    </div>
-</div>
-</div>
-<div class="clear"></div>
-<div id="post_next_prev"><a href="http://www.cnblogs.com/kym/archive/2011/03/05/1971604.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/kym/archive/2011/03/05/1971604.html" title="发布于2011-03-05 14:40">mongodb小结(转)</a><br><a href="http://www.cnblogs.com/kym/archive/2011/03/15/1984380.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/kym/archive/2011/03/15/1984380.html" title="发布于2011-03-15 03:47">载入Haskell的函数</a><br></div>
-</div>
+<p>好吧，那就让我们忘记那些C#中Lambda背后的实现机制，在C#中，还是在那些更纯粹地支持函数式编程的语言中，尽情地去体验函数式编程带给我们的快乐把！</p>
 
-
-		</div>
-		<div class="postDesc">posted @ <span id="post-date">2011-03-07 23:12</span> <a href="http://www.cnblogs.com/kym/">飞林沙</a> 阅读(<span id="post_view_count">59890</span>) 评论(<span id="post_comment_count">54</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=1976519" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(1976519);return false;">收藏</a></div>
-	</div>
 
