@@ -25,3 +25,23 @@ will be add before 1st line
 ```bash
 sed -i '2s/.*/worker_processes 1;/' /etc/nginx/nginx.conf 	
 ```
+
+3. search for line that matching pattern ,and return the line number. -n for return number only
+
+ sample 1
+```bash
+sed -n '/jfkdf/=' test.csv
+```
+```
+3
+```
+ sample 2
+```bash
+sed '/jfkdf/=' test.csv
+```
+```
+cool cool cool cool pay
+cool cool 
+3
+jfkdf
+```
