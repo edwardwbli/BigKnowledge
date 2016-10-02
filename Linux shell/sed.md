@@ -1,9 +1,25 @@
 
 # Sed command sample 
 
-1. tack on a nice header in a file
+1. tack on a nice header in a file( sample on MAC os, it's a must) 
+
+ sample 1
 ```bash  
-  sed -i 1i "potato_id,potato_type,description" potatoes.csv
+  sed  '1 i\ 
+  cool' test.csv
+```
+```
+cool will be add in 1st line
+```
+ sample 2
+```bash  
+  sed  '1 i\ 
+  cool
+  ' test.csv
+```
+```
+cool 
+will be add before 1st line
 ```
 2. override specific line, in below example , we override the second line in nginx.conf file.
 ```bash
