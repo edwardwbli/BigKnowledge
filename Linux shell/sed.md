@@ -1,7 +1,7 @@
 
 # Sed command sample 
 
-1. tack on a nice header in a file( sample on MAC os, it's a must) 
+1. tack on a nice header in a file( sample on MAC os) 
 
  sample 1
 ```bash  
