@@ -3,7 +3,7 @@ source is a bash shell built-in command that executes the content of the file pa
 It has a synonym in '.' (period).
 
 ```
-Syntax
+Syntax(two kind of Syntax)
       . filename [arguments]
 
       source filename [arguments]
