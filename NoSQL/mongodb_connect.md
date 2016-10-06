@@ -21,7 +21,7 @@ Please remember to change the above password as soon as possible!
 cat sample.json | mongoimport -c sample -u admin -p eziXxKd2qBR6
 ```
 
-4. mongo conection to console
+4. mongo conection to console,default connection to localhost
 ```
 mongo admin -u admin -p eziXxKd2qBR6
 ```
