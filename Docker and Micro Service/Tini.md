@@ -4,7 +4,7 @@
 ##Abstraction: 
 Tini is the simplest init you could think of.
 
-All Tini does is spawn a single child (Tini is meant to be run in a container), and wait for it to exit all the while reaping zombies and performing signal forwarding.
+All Tini does is spawn a single child (Tini is meant to be run in a container), and wait for it to exit all the while reaping(接管） zombies and performing signal forwarding.
 
 In Docker, you will want to use an entrypoint so you don't have to remember to manually invoke Tini:
 ```
