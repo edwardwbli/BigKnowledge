@@ -16,7 +16,7 @@ Please remember to change the above password as soon as possible!
 ========================================================================
 ```
 
-3. mongoimport sample, default host is localhost and port is 
+3. mongoimport sample, default host(localhost) and port, without -d option, the db will be ```test``` 
 ```
 cat sample.json | mongoimport -c sample -u admin -p eziXxKd2qBR6
 ```
@@ -24,4 +24,14 @@ cat sample.json | mongoimport -c sample -u admin -p eziXxKd2qBR6
 4. mongo conection to console
 ```
 mongo admin -u admin -p eziXxKd2qBR6
+```
+
+5. mongo db selection and data return
+```
+   >use test
+   switched to db test
+   >show collections
+   sample
+   >db.sample.find()
+   { "_id" : 10, "username" : "peter", "email" : [ "pbbakkum@gmail.com", "pbb7c@virginia.edu" ] }
 ```
