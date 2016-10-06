@@ -15,3 +15,7 @@ You can now connect to this MongoDB server using:
 Please remember to change the above password as soon as possible!
 ========================================================================
 ```
+3. mongoimport sample 
+```
+cat sample.json | mongoimport -c sample -u admin -p eziXxKd2qBR6
+```
