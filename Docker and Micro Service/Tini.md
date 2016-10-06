@@ -1,5 +1,5 @@
 #[Tini](https://github.com/krallin/tini.git) 
-##key: ```孤儿进程,僵尸进程,进程接管```
+##key: ```Tini,孤儿进程,僵尸进程,进程接管```
 
 ##Abstraction: 
 Tini is the simplest init you could think of.
