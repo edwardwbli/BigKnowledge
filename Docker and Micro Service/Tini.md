@@ -2,7 +2,7 @@
 ##key: ```Tini,孤儿进程,僵尸进程,进程接管```
 
 ##Abstraction: 
-Tini is the simplest init you could think of.
+Tini is the simplest ```init``` you could think of.
 
 All Tini does is spawn a single child (Tini is meant to be run in a container), and wait for it to exit all the while reaping(接管） zombies and performing signal forwarding.
 
