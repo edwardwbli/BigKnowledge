@@ -15,7 +15,11 @@ You can now connect to this MongoDB server using:
 Please remember to change the above password as soon as possible!
 ========================================================================
 ```
-3. mongoimport sample 
+
+3. mongoimport sample, default host is localhost and port is 
+
 ```
 cat sample.json | mongoimport -c sample -u admin -p eziXxKd2qBR6
 ```
+
+4. 
