@@ -17,9 +17,11 @@ Please remember to change the above password as soon as possible!
 ```
 
 3. mongoimport sample, default host is localhost and port is 
-
 ```
 cat sample.json | mongoimport -c sample -u admin -p eziXxKd2qBR6
 ```
 
-4. 
+4. mongo conection to console
+```
+mongo admin -u admin -p eziXxKd2qBR6
+```
