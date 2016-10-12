@@ -1,4 +1,4 @@
-#[Kafka  深入p解析](http://www.jasongj.com/2015/01/02/Kafka%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/)
+#[Kafka  深入解析](http://www.jasongj.com/2015/01/02/Kafka%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90/)
 
 ##key: ```分布式的，基于发布/订阅的消息系统， RabbitMQ，Redis, ZeroMQ, ActiveMQ, Kafka/Jafka```
 
