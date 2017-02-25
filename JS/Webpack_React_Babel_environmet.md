@@ -15,7 +15,7 @@
 
 * package.js  
 
-  ```js  
+  ```javascript  
   /*
     ./package.json  
   */  
