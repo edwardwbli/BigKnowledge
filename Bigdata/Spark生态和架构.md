@@ -2,22 +2,17 @@
 	<article itemprop="articleBody">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
-    
-      <a href="/2015/06/07/Spark/【Spark】Spark生态和Spark架构/" title="【Spark】Spark生态和Spark架构" itemprop="url">【Spark】Spark生态和Spark架构</a>
+  <a href="/2015/06/07/Spark/【Spark】Spark生态和Spark架构/" title="【Spark】Spark生态和Spark架构" itemprop="url">【Spark】Spark生态和Spark架构</a>
   </h1>
   <p class="article-author">By
     
-      <a href="http://blog.jasonding.top" title="Jason Ding">Jason Ding</a>
-    </p>
+   <a href="http://blog.jasonding.top" title="Jason Ding">Jason Ding</a>
+   </p>
   <p class="article-time">
-    <time datetime="2015-06-07T07:46:37.000Z" itemprop="datePublished">2015-06-07</time>
-    Updated:<time datetime="2016-03-16T06:24:42.000Z" itemprop="dateModified">2016-03-16</time>
-    
-  </p>
+   <time datetime="2015-06-07T07:46:37.000Z" itemprop="datePublished">2015-06-07</time>
+   Updated:<time datetime="2016-03-16T06:24:42.000Z" itemprop="dateModified">2016-03-16</time></p>
 
-
-		
-		<h2 id="Spark概览"><a href="#Spark概览" class="headerlink" title="Spark概览"></a>Spark概览</h2><p>Spark 是一个通用的大规模数据快速处理引擎。可以简单理解为 Spark 就是一个大数据分布式处理框架。<br><strong>Spark是基于map reduce算法实现的分布式计算框架，但不同的是Spark的中间输出和结果输出可以保存在内存中，从而不再需要读写HDFS，因此Spark能更好地用于数据挖掘与机器学习等需要迭代的map reduce的算法中。</strong></p>
+<h2 id="Spark概览"><a href="#Spark概览" class="headerlink" title="Spark概览"></a>Spark概览</h2><p>Spark 是一个通用的大规模数据快速处理引擎。可以简单理解为 Spark 就是一个大数据分布式处理框架。<br><strong>Spark是基于map reduce算法实现的分布式计算框架，但不同的是Spark的中间输出和结果输出可以保存在内存中，从而不再需要读写HDFS，因此Spark能更好地用于数据挖掘与机器学习等需要迭代的map reduce的算法中。</strong></p>
 <h2 id="Spark生态系统BDAS"><a href="#Spark生态系统BDAS" class="headerlink" title="Spark生态系统BDAS"></a>Spark生态系统BDAS</h2><p>伯克利将Spark的整个生态系统称为伯克利数据分析栈(BDAS)。其核心框架是Spark，同时BDAS涵盖支持结构化数据SQL查询与分析的查询引擎Spark SQL，提供机器学习功能的系统MLbase及底层的分布式机器学习库MLlib、并行图计算框架GraphX，流计算框架Spark Streaming、采样近似计算查询引擎BlinkDB、内存分布式文件系统Tachyon、资源管理框架Mesos等子项目。这些子项目在Spark上层提供了更高层、更丰富的计算范式。<br><img src="http://7nj1qk.com1.z0.glb.clouddn.com/@/spark/intro/bdas.jpg" alt=""></p>
 <h3 id="（1）Spark"><a href="#（1）Spark" class="headerlink" title="（1）Spark"></a>（1）Spark</h3><p>Spark是整个BDAS的核心组件，是一个大数据分布式编程框架，不仅实现了MapReduce的算子map 函数和reduce函数及计算模型，还提供更为丰富的算子，如filter、join、groupByKey等。Spark将分布式数据抽象为弹性分布式数据集（RDD），实现了应用任务调度、RPC、序列化和压缩，并为运行在其上的上层组件提供API。其底层采用Scala这种函数式语言书写而成，并且所提供的API深度借鉴Scala函数式的编程思想，提供与Scala类似的编程接口。图1-2为Spark的处理流程（主要对象为RDD）。</p>
 <p>Spark将数据在分布式环境下分区，然后将作业转化为有向无环图（DAG），并分阶段进行DAG的调度和任务的分布式并行处理。</p>
