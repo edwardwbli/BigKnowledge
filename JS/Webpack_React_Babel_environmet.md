@@ -39,8 +39,8 @@
   ...  
   }  
   }
-
-  * webpack.config.js
+```
+* webpack.config.js
   
     ```js
     /*
@@ -86,7 +86,7 @@
         },
         plugins: [HtmlWebpackPluginConfig,ExtractTextPluginConfig]
     }
-
+```
 * .babelrc
 
   ```js
