@@ -2,8 +2,9 @@
 
 ## Hack 1
 Use iframe as a target of form target to submit a post request to avoid redirecting to the action URL, 
-and manipulate the loaded response in iframe, by add load event listener to iframe node.
-Note: Should disable 
+and manipulate the loaded response in iframe, by add load event listener to iframe node.   
+
+Note: Should disable we security
 * Chrome: start chrome with --disable-web-security
 
 Sample: 
