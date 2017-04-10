@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<HTML>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+<link rel="stylesheet" href="w3.css">
+<link rel="stylesheet" href="font-awesome.min.css">
+--> 
+<HEAD>
+        <TITLE>Automatic Testing</TITLE>
+</HEAD>
+<STYLE>
+body {
+	padding-left: 10px;
+	font-family: "Open Sans", Arial;
+
+}
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Open Sans", Arial;
+}
+
+div.config {
+  background: #FFF;
+  border-radius: 4px;
+  border:1px solid grey;
+  width:90%;
+  padding: 10px;
+  overflow: auto;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.19);
+  float: left;
+
+}
+div.option.baseoption {
+	float: left;
+	width: 50%
+	min-width:300px;
+}
+div.option.advanceoption {
+	float: left;
+	width: 30%;
+	min-width:200px;
+	transition: width 0.5s;
+}
+
+label.bottom:active {
+	box-shadow: none;
+
+}
+label.bottom:hover {
+	cursor: pointer;
+}
+label.bottom {
+	border:1px solid grey;
+	padding: 5px;
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.19);
+	color:black;
+	border-radius: 6px;
+	background-color: rgb(120, 152, 242);
+	overflow:none;
+}
+
+label.bottom.buttonlabel {
+	background-color: rgb(244, 212, 51);
+	
+}
+
+div.testcase {
+	padding-top: 20px;
+	padding-bottom: 100px;
+	clear: left;
+	background: #FFF;
+	border-radius: 4px;
+	overflow: auto;
+
+}
+div.caserow {
+	clear: left;
+
+}
+div.column {
+
+	width: 20%;
+	border: 1px solid grey;
+	float: left;
+	overflow: hidden;
+	padding: 5px;
+	border-color:grey;
+	margin: 1px auto;
+	border-radius: 3px;
+	height: 1em;
+}
+div.column.header {
+	background-color: rgb(120, 152, 242);
+	font-weight:bold;
+}
+div.column.header.request:hover {
+	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.19);
+	cursor: pointer;
+	color: red;
+}
+div.control  div.column {
+	background-color: rgb(221, 221, 221);
+}
+div.new div.column {
+	background-color: rgb(190, 255, 185);
+}
+input.testcase {
+
+	width: 100%;
+	overflow: hidden;
+	border:none;
+}
+
+div.wrapper {
+    width: 100%;
+    height: 100px;
+}
+span {
+	color: red;
+	font-weight: bold;
+}
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 20px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.1); /* Black w/ opacity */
+	
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%;
+	overflow: auto;
+	border-radius: 4px;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.19);
+
+}
+/*popup box textarea*/
+textarea.popupcontent {
+	width: 90%;
+	border-radius: 4px;
+}
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.delete {
+    color: #ffffff;
+    float: left;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.delete:hover,
+.delete:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+</STYLE>
+<BODY>
+	<div id="header">
+        <H1>Automatic Testing V1.3</H1>
+        <!--<p>
+		<ul><span>Caution:</span>
+		<li>Current version of testing tool require <span>Chrome</span> opening with option  <span>--disable-web-security --disable-web-security --user-data-dir</span>.
+		<br/>To eliminate this issue, WMB server should return request with header info 'Access-Control-Allow-Origin' = '*'</li>
+		<li>Predefine MQ is self-explained</li>
+		<li>TestCase View may have some issue on auto refreshing, please Press F5 if you found result un-expected</li>
+		<li>If you have any comment, please contact edwardwbli@hsbc.com.cn</li>
+		</ul>
+		</p>-->
+    </div>    
+    <div id="config" class ="config" >
+		<div id="baseoption" class="option baseoption">
+        <FORM NAME="dummy_mqput">
+                
+				
+                <H3>Start testing(choose test case):
+				<label class="bottom" id="filelabel" for="reqfile" >Select File</label>
+				<INPUT id="reqfile" type="file" style="visibility: hidden;width:1px;"></INPUT>
+
+				</H3>
+				<H3 style="text-align:center">
+				Fail:<INPUT  TYPE="number" id="failcount" NAME="failcount" VALUE="0" readonly="readonly" style="min-width:40px;max-width:55px;height:50px;text-align:right;background-color:rgb(255, 159, 159);border-radius: 4px;border: none;font-size:30px;font-weight:bold;"/>
+				Success:<INPUT TYPE="number" id="successcount" NAME="successcount" VALUE="0" readonly="readonly" style="min-width:40px;max-width:55px;height:50px;text-align:right;background:rgb(145, 245, 145);border-radius: 4px;border: none;font-size:30px;font-weight:bold;"/>
+                </H3>
+				<B>Message Queue Manager:
+                <INPUT TYPE="TEXT" NAME="mqm" VALUE="UA0L001WMB" size="10"/>
+				</B>
+                <BR/>
+				<BR/>
+                <B>MQ:
+				<select size="1" name="mq">
+					<option value="TSSG.RAP_IVR.HKSSG.HKHSBC_IVR_RQST.S1" >O68 PBS-SSG ISM2.0FIX</option>	
+					<option value="TSSG.RAP_IVR.HKSSG.IVR_RQST.S2" selected>O35 PBS-SSG ISM2.0FIX</option>	
+					<option value="TSSG.RAP_IVR.HKSSG.IVR_RQST.S1" >CMB SIT O35 PBS-SSG ISM2.0FIX</option>	
+					<option value="TSSG.RAP_IVR.HKSSG.IVR_RQST.U1" >CMB SIT O68 PBS-SSG ISM2.0FIX</option>	
+					<option value="RAP_PZ.HK_SFE.A3_PZ.HKHSBC_SSG_ENQ_RQST.U1">UAT-DCR SSG ISM2.0FIX</option>	
+					<option value="RAP_PZ.HK_SFE.A3_PZ.HKHSBC_DCP_ENQ_UTF_RQST.S1">SIT-DCR SSG ISM2.0XML</option>	
+					<option value="RAP_PZ.AP_DTP.A3_PZ.HKHSBC_SSG_STMA_RQST.U1">UAT DCR SSG STMA ISM2.0FIX</option>	
+					<option value="RAP_PZ.RGR_BIS.A3_PZ.HKHSBC_DCP_ENQ_RQST.D1" >SIT-DCR DCP ISM2.0FIX</option>	
+					<option value="RAP_PZ.RAP_BIS.A3_PZ.HKHSBC_DCP_ENQ_UTF_RQST.U1">UAT-DCR DCP ISM2.0XML</option>	
+					<!--<option value="TLNXDTX.HKDTX.A3_DCR.GSP_TEST_REQ.U1">UAT-DCR DCP ISM2.0XML</option>	-->
+                    <option value="RAP_PZ.RAP_BIS.A3_PZ.HKHSBC_DCP_ENQ_RQST.U1" >UAT-DCR DCP ISM2.0FIX</option>	
+				</select>
+				or Other MQ:<INPUT name="otherMQ" TYPE="TEXT" NAME="mqm" VALUE=""/>
+				</B>
+                <BR/>
+				<BR/>
+                <B>MQMD.CCSID:
+                
+                <SELECT size="2" NAME="ccsid">
+						<OPTION VALUE="1208">(ISM2.0XML)1208 UTF-8 </OPTION>
+                        <OPTION VALUE="37" SELECTED>(ISM2.0FIX)37 EBCDIC</OPTION>
+                 </SELECT>
+                </B>
+				<BR/>
+				<BR/>
+                <B>MQMD.Encoding:
+                <SELECT NAME="mqmdencoding">
+                        <OPTION VALUE="273">(273) MQENC_UNIX for AIX/SOLARIS integers</OPTION>
+                        <OPTION VALUE="546">(546) MQENC_WINDOWS for PC integers</OPTION>
+                        <OPTION VALUE="785">(785) MQENC_390 for host 390 integers</OPTION>
+                </SELECT>
+                </B>
+				
+				<BR/>
+				<BR/>
+                <B>Reply to MQ Manager:
+                
+                <INPUT TYPE="TEXT" NAME="rmqm" VALUE="UA0L001WMB" size="10"/>
+                </B> 
+				<BR/>
+				<BR/>
+                <B>Reply to MQ:
+                
+                <INPUT TYPE="TEXT" NAME="rmq" VALUE="TLNXDTX.HKDTX.HKDTX.HKHSBC.DUMMY.001" size="40"/>
+                </B>
+				
+				<BR/>
+				<BR/>
+                <B style="display:none">Response Mode:
+                
+                <SELECT NAME="mode">
+						<OPTION VALUE="GET" selected>GET</OPTION>
+                        <OPTION VALUE="BROWSE">BROWSE</OPTION>
+                        
+                </SELECT>
+				</B>
+        </FORM>
+        <FORM NAME="mqput" METHOD="POST" target="puttarget" ACTION="http://ua0l001wmb-mqm.hk.hsbc:7804/mqput">
+                <INPUT TYPE="HIDDEN" NAME="DATA" VALUE="" />
+        </FORM>
+		</div>
+		<div id="advanceoption" class="option advanceoption" style="padding-left:20px;border-left:groove 2px;border-left-color:rgba(234, 234, 234, 0.25);padding-bottom:200px;">
+		<h3>Advance Options:
+		</h3>
+		<div>
+		<label for="controlrun">Control Run</label><input id="controlrun" name="testtype" type="radio" value="control"  ></input>
+		<label for="newrun">New Run</label><input id="newrun" name="testtype" type="radio" value="new" ></input>
+
+		</div>
+		<br/>
+		<div>
+		<label for="runtime">Runtime: </label><input id="runtime" name="runtime" type="time" ></input>
+		</div>
+		<br/>
+		<div>
+		<label for="frequency">Frequency: </label><input id="frequency" name="frequency" type="number" ></input>
+		</div>
+		
+		</div>
+	</div>
+
+	<br/>
+	<br/>
+	<div id="testcaseview" class="testcase" style="width:100%">
+		<p>TestCase View 
+
+		<label class="bottom buttonlabel" id="buttonlabel" for="cleanbutton" >Clean Case</label>
+		<button id="cleanbutton" onclick="cleanCases()" style="visibility: hidden;"></button>	
+		<label class="bottom" id="buttonlabel" for="compare" >Compare Case</label>
+		<button id="compare" onclick="setTimeout(compareControlNew,0)" style="visibility: hidden;"></button>	
+		<div class="caserow header">
+		<div class="column header request" onclick="popUpRequest('')">Request</div>
+		<div class="column header">Response</div>
+		<div class="column header">Status</div>
+		<div class="column header">Time</div>
+		</div>
+		<div id="responsearea" style="word-wrap: break-word;">
+		</div>
+		</p>
+	</div>
+	<div id="myModal" class="modal">
+	 <!-- Modal content -->
+	<div class="modal-content">
+		<span class="close">&times;</span>
+		<textarea class="popupcontent" id="popupcontent" rows="20"></textarea>
+		<br/>
+		<br/>
+		<label for='putq' class='bottom buttonlabel' id='retestButton' style="visibility: hidden;">Test</label>
+		<button id="putq" onclick="testAgain()" style="visibility: hidden;"></button>	
+		<label>Position </label><input type="text" id="position" style="width:30px;" readonly='readonly'>
+		<label>Selection </label><input type="text" id="selectionrange" style="width:30px;" readonly='readonly'>
+	</div>
+	
+	</div>	
+
+<script src="axios.min.js"></script>
+<script src="gun.js"></script>
+<SCRIPT LANGUAGE="javascript">
+<!--
+'use strict';
+var gun = Gun();
+//simple query of DOM with ID 
+var I$ = function (str) {
+	return document.getElementById(str);
+}
+
+var testcasegun = gun.get('testcases/');
+var responsearea = document.getElementById('responsearea');
+//get advance option 
+var controlRunOption =  document.getElementById('controlrun');
+var newRunOption = document.getElementById('newrun');
+
+
+/*counter*/
+function create_counter(initval) {
+	var init = initval || 0;
+	return {
+		curval: function () {return init},
+		inc: function () {
+			init += 1
+			return init 
+		}
+	}
+}
+var casescounter = create_counter();
+/*testcasegun.map().val(function(data){
+				let row = document.createElement('div');
+				row.innerHTML=data;
+				responsearea.appendChild(row)
+				casescounter.inc();
+			});
+*/
+testcasegun.map((formatTestCaseView));	
+		
+function formatLocalDate() {
+    var now = new Date(),
+        tzo = -now.getTimezoneOffset(),
+        dif = tzo >= 0 ? '+' : '-',
+        pad = function(num) {
+            var norm = Math.abs(Math.floor(num));
+            return (norm < 10 ? '0' : '') + norm;
+        };
+    return now.getFullYear() 
+        + '-' + pad(now.getMonth()+1)
+        + '-' + pad(now.getDate())
+        + 'T' + pad(now.getHours())
+        + ':' + pad(now.getMinutes()) 
+        + ':' + pad(now.getSeconds()) 
+        + dif + pad(tzo / 60) 
+        + ':' + pad(tzo % 60);
+}
+
+function formatTestCaseView(data,id) {
+	//should be call by gun map
+	if (data == null) {casescounter.inc();	return;}
+	if (data instanceof Object) {
+	 var dataarray = data[1].split('\r');
+	 }else {
+	 var dataarray = data.split('\r');
+	 }
+	var dataarray = data.split('\r');
+	var cols = "<div class='column '><input ondblclick='popUpRequest(this.value);' readonly='readonly' id='testcaserequest' class='testcase' value='" + dataarray[0] + "'></input></div><div class='column '><input ondblclick='popUp(this.value);' readonly='readonly'  id='testcaseresponse' class='testcase' value='" + dataarray[1].replace(/\'/g,'&#39;') + "'></input></div><div class='column '>" + dataarray[2]  + "</div><div class='column '>" + dataarray[3]  + "</div><span id='deletecase' onclick='deleteCase(this.parentElement,this.parentElement.parentElement)' class='delete'>&times;</span>";
+	var row = document.createElement('div');
+	row.id=id;
+	var typeOfRun = dataarray[4];
+	row.className += 'caserow ';
+	row.className += typeOfRun ? typeOfRun : '';
+	row.innerHTML=cols;
+	responsearea.appendChild(row)
+	casescounter.inc();	
+}
+function storeTestCase(response,request,status) {
+	var typeOfRun = (controlRunOption.checked && controlRunOption.value) || (newRunOption.checked && newRunOption.value) || '';
+	
+	var key = casescounter.curval() + 1;
+	var timestamp = formatLocalDate().slice(0,19);
+	//var testcase = "<div class='col'><input ondblclick='alert(this.value);' readonly='readonly' id='content' class='testcase' value='" + request + "'></input></div><div class='col'><input ondblclick='alert(this.value);' readonly='readonly'  id='content' class='testcase' value='" + response + "'></input></div><div class='col'>" + status + "</div><div class='col'>" + timestamp + "</div>";
+	var testcase = request + "\r" + response +"\r"+ status + "\r" + timestamp + "\r" + typeOfRun ;
+	var obj = {};
+	obj[key] = testcase;
+	
+	testcasegun.put(obj);
+	//testcasegun.path(key).put(testcase);
+}
+
+function getResponse(key) {
+	
+}
+
+
+
+function verifyResult(message) {
+	var  respmessage = message 
+	return function () {
+
+		var reasoncodeIndex = respmessage.indexOf('REASCODE  0001');
+		var tracecodeIndex	= respmessage.indexOf('TRACECDE  0001@@');
+		var gsicodeIndex = respmessage.slice(2139,2141) =='@@' ? 2141 : -1 ;
+		var rspcode;
+		
+		if (reasoncodeIndex !== -1 ) {
+			rspcode = respmessage.slice(reasoncodeIndex + 14,reasoncodeIndex + 21)
+			
+		} else if (tracecodeIndex !== -1 )	{
+			rspcode = respmessage.slice(tracecodeIndex + 16,tracecodeIndex + 22)
+		} else if (gsicodeIndex !== -1 ) {
+			rspcode = respmessage.slice(gsicodeIndex,gsicodeIndex + 6)
+		} 
+		
+		//'DCP000' for normal DCP message checking
+		//'0000000' for REASCODE check of SSG message
+		//'PBS000 ' for REASCODE check of Bill payment message checking(EBRS,EBRD)
+		if (rspcode != 'DCP000' && rspcode != '0000000' && rspcode != 'PBS000 ') {
+			var failcount = Number(document.dummy_mqput.failcount.value) + 1
+			
+			document.dummy_mqput.failcount.value = failcount;
+			return 'fail - ' + ( rspcode || 'N/A');
+		} else {
+			var successcount = Number(document.dummy_mqput.successcount.value) + 1
+			document.dummy_mqput.successcount.value = successcount;
+			return 'success';
+		}
+		
+	}
+	
+}
+var fileInput = document.getElementById('reqfile');
+var filelabel = document.getElementById('filelabel');
+fileInput.addEventListener('change', function () {
+
+	var file = fileInput.files[0];
+	var reader = new FileReader();
+	
+    reader.onload = function(e) {
+			
+			var data = e.target.result;
+			var lines = data.split('\r\n');
+			var period = 1000;
+			var cnt = create_counter();
+			setTimeout(goMqClean,cnt.inc()*period);
+
+			for (var key in lines) {
+				//console.log(lines[key].length)
+				//setTimeout(goMqClean,cnt.inc()*period);
+				
+				setTimeout((function (line) {
+								var request = line
+								return function () { goMqPut(request);}
+							})(lines[key]),cnt.inc()*period);
+							
+				var last = key == lines.length - 1 ? true:false ;
+ 
+				setTimeout((function (last, request) {
+								var last = last
+								var request = request
+								return function () {goMqGet(last,request)}
+							})(last,lines[key]),cnt.inc()*period);
+				
+			}
+			
+        }
+     
+	reader.readAsText(file);
+	filelabel.textContent = "Processing...";
+	fileInput.value = "";
+	//when processing, All input field should be read only.
+	//toggleReadOnly();
+})
+
+function goMqPut(line) {
+		var mqm = document.dummy_mqput.mqm.value;
+		var mq = document.dummy_mqput.otherMQ.value || document.dummy_mqput.mq.value;
+		var rmqm = document.dummy_mqput.rmqm.value;
+		var rmq = document.dummy_mqput.rmq.value;
+		var ccsid = document.dummy_mqput.ccsid.options[document.dummy_mqput.ccsid.selectedIndex].value;
+		var conversion = ccsid;
+		//var conversion = document.dummy_mqput.conversion.options[document.dummy_mqput.conversion.selectedIndex].value;
+		var mqmdencoding = document.dummy_mqput.mqmdencoding.options[document.dummy_mqput.mqmdencoding.selectedIndex].value;
+        //var message = document.dummy_mqput.message.value;
+		var message = line;
+        //var data = mqm + '\n' + mq + '\n' + ccsid + '\n' + conversion + '\n' + mqmdencoding + '\n' + rmqm + '\n' + rmq + '\n' + message;
+        //document.mqput.DATA.value = data;
+        //document.mqput.submit();
+		/*TODO axios replace above submit later, on axios success response, call */
+		var request = mqm + '\r\n' + mq + '\r\n' + ccsid + '\r\n' + conversion + '\r\n' + mqmdencoding + '\r\n' + rmqm + '\r\n' + rmq + '\r\n' + message;
+		axiosProcess('/mqput',request);
+}
+function goMqClean() {
+		var mqm = document.dummy_mqput.mqm.value;
+		var rmq = document.dummy_mqput.rmq.value;
+        //var data = mqm + '\n' + rmq;
+        // document.mqclean.DATA.value = data;
+        //document.mqclean.submit();
+		var request = mqm + '\r\n' + rmq;
+		axiosProcess('/mqclean',request);
+		
+}
+
+function goMqGet(last,mqputrequest) {
+
+
+		var mqm = document.dummy_mqput.mqm.value;
+		var rmq = document.dummy_mqput.rmq.value;
+		var ccsid = document.dummy_mqput.ccsid.options[document.dummy_mqput.ccsid.selectedIndex].value;
+		var rspconversion = (ccsid == '37' && 'Cp037' ) || (ccsid == '1208' && 'UTF8' )
+		//var rspconversion = document.dummy_mqput.rspconversion.options[document.dummy_mqput.rspconversion.selectedIndex].value;
+		var mode = document.dummy_mqput.mode.options[document.dummy_mqput.mode.selectedIndex].value;
+        var data = mqm + '\n' + rmq + '\n' + rspconversion + '\n' + mode;
+        //document.mqget.DATA.value = data;
+        //document.mqget.submit();
+		/*exp*/
+		function handleResponse() {
+			return function (data) {
+				if (last) {filelabel.textContent = "Select File";}
+				var XMLParser = new DOMParser();
+				var responseHTML = XMLParser.parseFromString(data.request.responseText, "text/html");
+				var message = responseHTML.getElementsByTagName('textarea')[0].value;
+				var payloadindex = message.indexOf('<?xml') !== -1 ? message.indexOf('<?xml'): message.indexOf('ISM Fixed');
+				if (payloadindex !== -1) {
+					var response = message.substr(payloadindex);
+					var status = verifyResult(response)();
+					storeTestCase(response,mqputrequest,status);
+				} else {
+					var status = verifyResult('no response')();
+					storeTestCase('no response',mqputrequest,status);
+				}
+		
+			}
+		}	
+
+		var request = mqm + '\r\n' + rmq + '\r\n' + rspconversion + '\r\n' + mode;
+		axiosProcess('/mqget',request,handleResponse());
+}
+
+function cleanCases () {
+	window.localStorage.clear();
+	//testcasegun.put(null);
+	//window.location.reload(false); 
+	
+	document.dummy_mqput.failcount.value = 0;
+	document.dummy_mqput.successcount.value = 0;
+	var node = document.getElementById('responsearea')
+	while (node.hasChildNodes()) {
+		node.removeChild(node.lastChild);
+	}
+}
+
+// Set config defaults when creating the axios instance
+var axiosUA0l001WMB = axios.create({
+  baseURL: 'http://ua0l001wmb-mqm.hk.hsbc:7804',
+  headers: {'Access-Control-Allow-Origin': '*'
+			},
+  transformRequest: [function (data) {
+    // Do whatever you want to transform the data
+	// form submited data will be encoded as space to '+', ! to %21, ( to %28, and )  to %29, other is align will encodeURIComponent
+	// there is 3 way to encode data in js as below:  
+    //下面列出了这三个函数的安全字符（即函数不会对这些字符进行编码）
+    //escape（69个）：*/@+-._0-9a-zA-Z
+    //encodeURI（82个）：!#$&'()*+,/:;=?@-._~0-9a-zA-Z
+    //encodeURIComponent（71个）：!'()*-._~0-9a-zA-Z	
+	return 'DATA=' + encodeURIComponent(data).replace(/%20/g,'+').replace(/!/g,'%21').replace(/\(/g,'%28').replace(/\)/g,'%29');
+
+  }],
+  /*transformResponse: [function (data) {
+    // Do whatever you want to transform the data
+	
+	var XMLParser = new DOMParser();
+	var responseHTML = XMLParser.parseFromString(data, "text/html");
+	console.log(responseHTML.getElementsByTagName('body'));
+    return responseHTML;
+  }],*/
+ 
+});
+
+function axiosProcess(api,message,fun) {
+	if (typeof fun === 'undefined') {
+		axiosUA0l001WMB.post(api, message);
+	} else {
+		axiosUA0l001WMB.post(api, message).then(fun);
+	}
+}
+
+
+var control = I$("controlrun");
+var newrun = I$("newrun");
+ 
+control.addEventListener("dblclick", function(e){
+	e.target.checked = false;
+})
+
+ 
+newrun.addEventListener("dblclick", function(e){
+	e.target.checked = false;
+})
+
+function toggleReadOnly() {
+	//set editable field to read only.
+	var inputEles = document.getElementsByTagName('input');
+	for (var index in inputEles  ) {
+	  if (inputEles[index] instanceof HTMLElement) {
+		
+		(inputEles[index].readOnly == 'undefined' || inputEles[index].readOnly == true) ? inputEles[index].readOnly = false :inputEles[index].readOnly = true; }
+		//console.log(inputEles[index] );
+	}
+}
+
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get the popup textarea tag
+var popupcontent = document.getElementById("popupcontent");
+
+// Get the retestButton
+var retestButton = document.getElementById("retestButton");
+var replaceButton = document.getElementById("replaceButton");
+var fromInput = document.getElementById("fromInput");
+var toInput = document.getElementById("toInput");
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+var interval;
+var position	= document.getElementById("position");
+var selectionrange	= document.getElementById("selectionrange");
+var textarea	= document.getElementById("popupcontent");
+function popUp(data) {
+	popupcontent.value = data;
+	modal.style.display = "block";
+	retestButton.style.visibility = "hidden";
+	interval = setInterval(function() { position.value = cursorposition(textarea);selectionrange.value = selectionarea(textarea)}, 200);
+}
+
+
+function popUpRequest(data) {
+	popupcontent.value = data;
+	modal.style.display = "block";
+	retestButton.style.visibility = "visible";
+	interval = setInterval(function() { position.value = cursorposition(textarea);selectionrange.value = selectionarea(textarea)}, 200);
+}
+
+function testAgain() {
+	var data = popupcontent.value;
+	setTimeout(goMqClean,0);
+	setTimeout((function (data) {
+								return function () { goMqPut(data);}
+							})(data),0);
+    setTimeout((function (last, request) {
+								return function () {goMqGet(last,request)}
+							})(true,data),1000);
+}
+
+function replaceData() {
+	var str=popupcontent.value; 
+	var n=str.replace(fromInput.value,toInput.value);
+	popupcontent.value=n;
+}
+
+
+span.onclick = function() {
+	// When the user clicks on <span> (x), close the modal
+    modal.style.display = "none";
+	clearInterval(interval);
+}
+
+
+window.onclick = function(event) {
+	// When the user clicks anywhere outside of the modal, close it
+    if (event.target == modal) {
+        modal.style.display = "none";
+		clearInterval(interval);
+    }
+	
+}
+
+
+function compareControlNew() {
+	//function for compare control run and new run 
+
+	var controlTestResponse = document.querySelectorAll("div.control  #testcaseresponse");
+
+	var newTestResponse = document.querySelectorAll("div.new  #testcaseresponse");
+    for (var i = 0; i < controlTestResponse.length; i++ ) {
+        //do stuff
+		if (typeof controlTestResponse[i] == 'undefined' || typeof newTestResponse[i] == 'undefined') {
+			console.log('mis-matching record');
+		}
+		else if (controlTestResponse[i].value.slice(2322) == newTestResponse[i].value.slice(2322)) {
+	 
+			controlTestResponse[i].style.backgroundColor = "rgb(221, 221, 221)";
+			newTestResponse[i].style.backgroundColor = "rgb(190, 255, 185)";
+		}else  {
+			controlTestResponse[i].style.backgroundColor = "red";
+			newTestResponse[i].style.backgroundColor = "red";
+		}
+    }
+}
+
+
+function extractTestCase() {
+	//function to extract test cases to csv format.
+}
+
+
+function deleteOnecase () {
+	//function to delete one case.
+	//delete DOM node
+	//delete data storage
+}
+
+function cursorposition(node) {
+	//node.focus();
+	/* without node.focus() IE will returns -1 when focus is not on node */
+	if (node.selectionStart)
+		return node.selectionStart;
+	else if (!document.selection)
+		return 0;
+	/*var c  = parseInt('001', 8);;
+	var sel = document.selection.createRange();
+	var dul = sel.duplicate();
+	var len = 0;
+	dul.moveToElementText(node);
+	sel.text = c;
+	len = (dul.text.indexOf(c));
+	sel.moveStart('character', -1);
+	sel.text = "";
+	return len;*/
+}
+function selectionarea(node) {
+	//node.focus();
+	/* without node.focus() IE will returns -1 when focus is not on node */
+	var start = cursorposition(node);
+	if (node.selectionEnd) {
+		return node.selectionEnd - start;
+	}else if (!document.selection) {
+		return 0;
+	}
+
+}
+
+function deleteCase(node, parentnode) {
+	//delete test case
+	parentnode.removeChild(node);
+	console.log(node.id);
+	testcasegun.path(node.id).put(null);
+} 
+
+
+
+//-->
+</SCRIPT>
+</BODY>
+</HTML> 
